@@ -29,7 +29,7 @@ class GenSitemapCommand extends Command
         );
 
         // add header
-        $file = fopen('webroot/sitemap.xml', 'w');
+        $file = fopen('cronjob-output/sitemap.xml', 'w');
         fwrite($file, "<?xml version='1.0' encoding='UTF-8'?>\n\n");
         fwrite($file, '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n");
 

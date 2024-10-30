@@ -1,10 +1,16 @@
 # Release notes
 
-## Version 2024-09/2
-*Release date: 2024-10-22* 
+## Version 2024-09/3
+*Release date: 2024-10-30*
 
 ### Bug fix
-- Fix: Required file missing #110 
+- Fix: Required file missing - sitemap.xml #110
+
+## Version 2024-09/2
+*Release date: 2024-10-22*
+
+### Bug fix
+- Fix: Required file missing - search_list.json #110 
 
 
 ## Version 2024-09 
