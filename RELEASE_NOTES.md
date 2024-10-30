@@ -4,7 +4,8 @@
 *Release date: ...*
 
 ### Small changes
-- ...
+- Updated dependencies
+- Updated Composer to 2.8.2
 
 
 ## Version 2024-10
