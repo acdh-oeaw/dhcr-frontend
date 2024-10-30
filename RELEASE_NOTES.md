@@ -13,6 +13,19 @@
 - Required PHP version 8.3 or later, since version 8.2 active support ends on 2024-12-31
 
 
+## Version 2024-09/3
+*Release date: 2024-10-30*
+
+### Bug fix
+- Fix: Required file missing - sitemap.xml #110
+
+## Version 2024-09/2
+*Release date: 2024-10-22*
+
+### Bug fix
+- Fix: Required file missing - search_list.json #110 
+
+
 ## Version 2024-09 
 *Release date: 2024-10-05*
 

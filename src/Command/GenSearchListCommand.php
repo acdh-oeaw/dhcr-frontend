@@ -36,7 +36,7 @@ class GenSearchListCommand extends Command
                 . '  -  ' . trim($course->course_type->name);
         }
 
-        $file = fopen('webroot/search_list.json', 'w');
+        $file = fopen('cronjob-output/search_list.json', 'w');
         fwrite($file, json_encode($searchList));
         fclose($file);
 

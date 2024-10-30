@@ -46,8 +46,6 @@ upgrade
 
 # Files which should be generated on deployment
 webroot/js/idp_select/DiscoFeed\.json
-webroot/search_list.json
-webroot/sitemap.xml
 
 # DB schema dump
 /config/Migrations/schema-dump-default.lock
