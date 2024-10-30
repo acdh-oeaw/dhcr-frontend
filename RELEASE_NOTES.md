@@ -4,7 +4,7 @@
 *Release date: ...*
 
 ### Changes
--  Upgraded to CakePHP 4.5.7 and PHP 8.3 #85
+-  Migrated to CakePHP 4.5.7 and PHP 8.3 #85
 
 ### Small changes
 - Added ddev config
