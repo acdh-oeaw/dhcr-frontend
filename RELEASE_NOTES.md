@@ -4,6 +4,7 @@
 *Release date: ...*
 
 ### Small changes
+- Fix: User account can be approved before email address is confirmed #108
 - Updated dependencies
 - Updated Composer to 2.8.2
 

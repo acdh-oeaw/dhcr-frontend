@@ -492,7 +492,8 @@ class UsersController extends AppController
                 ->contain('Institutions')
                 ->where([
                     'approved' => 0,
-                    'active' => 1
+                    'active' => 1,
+                    'email_verified' => 1
                 ]);
             $this->set('users', $this->paginate($query));
             $usersCount = $this->Users->find()->where([
