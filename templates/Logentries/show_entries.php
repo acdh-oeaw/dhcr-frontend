@@ -13,6 +13,18 @@
     </div>
     <p></p>
     <div class="table-responsive">
+        <p>
+            <ul>
+                <li><?= $this->Html->link('Show all log entries', ['controller' => 'logentries', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link('Show only errors (Type >= 50)', ['controller' => 'logentries', 'action' => 'errors']) ?></li>
+            </ul>
+            Available log types:<br>
+            10 - Notification<br>
+            20 - Sent email (not implemented yet)<br>
+            30 - Automated problem fixing (course reminders, etc.)<br>
+            50 - Non-fatal error<br>
+            90 - Fatal error<br>
+        </p>
         <table>
             <thead>
                 <tr>

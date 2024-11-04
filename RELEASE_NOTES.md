@@ -7,6 +7,7 @@
 - Updated dependencies
 - Updated Composer to 2.8.2
 - Remove email addresses from api output #109
+- Added possibility to view errors only from the log #81
 
 ### Bug fix
 - Fix: Course start dates are shown earlier in different timezone #113
