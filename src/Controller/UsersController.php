@@ -16,6 +16,7 @@ class UsersController extends AppController
 
     public $Institutions = null;
     public $InviteTranslations = null;
+    public $Logentries = null;
 
     public const ALLOW_UNAUTHENTICATED = [
         'signIn',
@@ -785,23 +786,47 @@ class UsersController extends AppController
                 if ($subscriptionStatusNew == 1) {
                     $requestUrl = env('LIST_SUBSCRIBE_URL');
                     $responseText = 'Successfully subscribed';      // response contains "Successfully subscribed:"
+                    $logAction = 'Subscribe mailinglist';
                 } else {
                     $requestUrl = env('LIST_UNSUBSCRIBE_URL');
                     $responseText = 'Successfully unsubscribed';    // response contains "Successfully Unsubscribed:"
+                    $logAction = 'Unsubscribe mailinglist';
                 }
                 $requestUrl .= $user->email . '&adminpw=' . env('LIST_ADMIN_PWD');
+                // prepare logging
+                $this->loadModel('Logentries');
+                $scriptName = basename(__FILE__, '.php');
+                // request
                 $html = file_get_contents($requestUrl);
                 if (stripos($html, $responseText) > 0) {    // mailman processed action
                     $user = $this->Users->patchEntity($user, $this->request->getData());
                     if ($this->Users->save($user)) {
                         $this->Flash->success($responseText);
+                        // log success
+                        $this->Logentries->createLogEntry(
+                            '10',
+                            '586',
+                            $scriptName,
+                            $logAction,
+                            $responseText
+                        );
                         return $this->redirect(['controller' => 'Dashboard', 'action' => 'profileSettings']);
                     } else {
-                        $this->Flash->error('Error: Subscription status not saved in DB.');
+                        $errorMessage = 'Subscription status not saved in DB';
+                        $this->Flash->error('Error: ' .$errorMessage);
                     }
                 } else {    // invalid response from mailman
-                    $this->Flash->error('Error: Subscription change not processed external.');
+                    $errorMessage = 'Subscription change not processed external';
+                    $this->Flash->error('Error: ' .$errorMessage);
                 }
+                // log error
+                $this->Logentries->createLogEntry(
+                    '50',
+                    '586',
+                    $scriptName,
+                    $logAction,
+                    $errorMessage
+                );
             }
         }
         $this->viewBuilder()->setLayout('contributors');
