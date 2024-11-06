@@ -1,7 +1,7 @@
 # Release notes
 
 ## Version 2024-10
-*Release date: ...*
+*Release date: 2024-11-06*
 
 ### Changes
 -  Migrated to CakePHP 4.5.7 and PHP 8.3 #85
