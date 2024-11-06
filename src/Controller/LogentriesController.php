@@ -29,12 +29,8 @@ class LogentriesController extends AppController
         $breadcrumControllers[1] = 'Logentries';
         $breadcrumActions[1] = 'index';
         $this->set((compact('breadcrumTitles', 'breadcrumControllers', 'breadcrumActions')));
-        $this->paginate = [
-            'contain' => ['LogentryCodes', 'Users'],
-            'order' => ['id' => 'desc']
-        ];
-        $logentries = $this->paginate($this->Logentries);
+        $query = $this->Logentries->find('all', ['order' => ['Logentries.id' => 'DESC']])->contain(['LogentryCodes', 'Users']);
+        $this->set('logentries', $this->paginate($query));
         $this->set(compact('user')); // required for contributors menu
-        $this->set(compact('logentries'));
     }
 }

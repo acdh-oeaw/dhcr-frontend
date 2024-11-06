@@ -10,6 +10,11 @@ use Cake\I18n\FrozenTime;
 
 class StatisticsController extends AppController
 {
+    public $Courses = null;
+    public $Users = null;
+    public $FaqQuestions = null;
+    public $InviteTranslations = null;
+    
     public function beforeRender(EventInterface $event)
     {
         parent::beforeRender($event);

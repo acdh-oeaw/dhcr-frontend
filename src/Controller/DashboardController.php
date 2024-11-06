@@ -10,6 +10,15 @@ use Cake\Core\Configure;
 
 class DashboardController extends AppController
 {
+    public $Users = null;
+    public $Courses = null;
+    public $Cities = null;
+    public $Institutions = null;
+    public $Countries = null;
+    public $Languages = null;
+    public $InviteTranslations = null;
+    public $FaqQuestions = null;
+    
     public function initialize(): void
     {
         parent::initialize();

@@ -1,5 +1,18 @@
 # Release notes
 
+## Version 2024-10
+*Release date: 2024-11-06*
+
+### Changes
+-  Migrated to CakePHP 4.5.7 and PHP 8.3 #85
+
+### Small changes
+- Added ddev config
+- Updated Composer to 2.8.1
+- Updated dependencies
+- Required PHP version 8.3 or later, since version 8.2 active support ends on 2024-12-31
+
+
 ## Version 2024-09/3
 *Release date: 2024-10-30*
 

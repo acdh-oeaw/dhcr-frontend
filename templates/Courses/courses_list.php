@@ -1,6 +1,8 @@
 <?php
 
 use Cake\Core\Configure;
+
+$coursesCount = $courses->count();
 ?>
 
 <div class="courses index content">
@@ -22,8 +24,9 @@ use Cake\Core\Configure;
                     <p>
                         If the course does not take place anymore, please unpublish it (Click Edit -> Uncheck publish).
                     </p>
-                    <p>If the course is still running but you wish to transfer the course ownership to a fellow lecturer, please 
-                        <a href="/info#contact">contact us</a>.</p>
+                    <p>If the course is still running but you wish to transfer the course ownership to a fellow lecturer, please
+                        <a href="/info#contact">contact us</a>.
+                    </p>
                 </strong></font>
         <?php
         }

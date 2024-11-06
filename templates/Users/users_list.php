@@ -3,6 +3,7 @@
         <h2><span class="glyphicon glyphicon-<?= $users_icon ?>"></span>&nbsp;&nbsp;&nbsp;<?= $users_view_type ?></h2>
         <div class="table-responsive">
             <?php
+            $usersCount = $users->count();
             if ($usersCount == 0) {
                 if ($users_view_type == 'Account Approval') {
                     echo '<p>No pending account requests.</p>';

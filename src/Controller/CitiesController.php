@@ -29,12 +29,9 @@ class CitiesController extends AppController
         $breadcrumControllers[1] = 'Cities';
         $breadcrumActions[1] = 'index';
         $this->set((compact('breadcrumTitles', 'breadcrumControllers', 'breadcrumActions')));
-        $cities = $this->paginate($this->Cities, [
-            'contain' => ['Countries'],
-            'order' => ['id' => 'asc']
-        ]);
+        $query = $this->Cities->find('all', ['order' => ['Cities.id' => 'ASC']])->contain('Countries');
+        $this->set('cities', $this->paginate($query));
         $this->set(compact('user')); // required for contributors menu
-        $this->set(compact('cities'));
     }
 
     public function add()
