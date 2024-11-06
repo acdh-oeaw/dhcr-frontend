@@ -123,8 +123,13 @@ class ViewHelper {
                 if ((!course.recurring && date < new Date()) || (course.recurring && lastMonth == date.getMonth())) continue;     // omit past dates except for recurring starts
                 lastMonth = date.getMonth()
                 if (start != '') start += dateSeparator;
-                let day = (date.getDate() == 0) ? 1 : date.getDate();
-                start += day + ' ' + ViewHelper.months()[date.getMonth()];
+                // Do not use JS Date object since this uses the timezone of the browser.
+                // This might cause showing incorrect dates, see issue #113
+                let dateAsText = split[i].trim();
+                let dateAsTextParts = dateAsText.split("-");
+                let day = parseInt(dateAsTextParts[2]);
+                let month = parseInt(dateAsTextParts[1]);
+                start += day + ' ' + ViewHelper.months()[month-1];
                 if (!course.recurring) start += ' ' + date.getFullYear();
             }
             if (verbose && start.length > 0 && course.recurring) start = 'each ' + start;

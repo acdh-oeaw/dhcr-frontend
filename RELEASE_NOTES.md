@@ -1,5 +1,19 @@
 # Release notes
 
+## Version 2024-11
+*Release date: ...*
+
+### Small changes
+- Updated dependencies
+- Updated Composer to 2.8.2
+- Remove email addresses from api output #109
+- Added possibility to view errors only from the log #81
+- Added logging for mailman sync #80
+
+### Bug fix
+- Fix: Course start dates are shown earlier in different timezone #113
+- Fix: User account can be approved before email address is confirmed #108
+
 ## Version 2024-10
 *Release date: 2024-11-06*
 
