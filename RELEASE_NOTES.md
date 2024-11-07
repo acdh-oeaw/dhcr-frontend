@@ -1,7 +1,7 @@
 # Release notes
 
 ## Version 2024-11
-*Release date: ...*
+*Release date: ...* 
 
 ### New features
 - Added amount of courses per country to statistics dashboard #105
