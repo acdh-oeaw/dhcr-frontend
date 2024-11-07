@@ -12,6 +12,7 @@ use Cake\I18n\FrozenTime;
     google.charts.setOnLoadCallback(drawChartArchivedSoonCourses);
     google.charts.setOnLoadCallback(drawChartNewCourses);
     google.charts.setOnLoadCallback(drawChartCourseCountsPerCountry);
+    google.charts.setOnLoadCallback(drawChartCourseCountsPerEducType);
 
     function drawChartUpdatedCourses() {
         var data1 = google.visualization.arrayToDataTable(<?php echo json_encode($updatedCourseCounts) ?>);
@@ -90,6 +91,20 @@ use Cake\I18n\FrozenTime;
             document.getElementById('chart_course_counts_per_country'));
         chart4.draw(data4, options4);
     }
+
+    function drawChartCourseCountsPerEducType() {
+        var data5 = google.visualization.arrayToDataTable(<?php echo json_encode($courseCountsPerEducType) ?>);
+        var options5 = {
+            height: 400,
+            legend: {
+                position: "none"
+            },
+        };
+        var chart5 = new google.visualization.BarChart(
+            document.getElementById('chart_course_counts_per_educ_type'));
+        chart5.draw(data5, options5);
+    }
+
 </script>
 
 <div class="statistics content">
@@ -126,6 +141,20 @@ use Cake\I18n\FrozenTime;
     <table>
         <tbody>
             <?php foreach ($courseCountsPerCountry as $count) : ?>
+                <tr>
+                    <td style="padding: 5px"><?= $count[0] ?></td>
+                    <td style="padding: 5px"><?= $count[1] ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <p></p>
+
+    <h3><span class="glyphicon glyphicon-book"></span>&nbsp;&nbsp;&nbsp;Courses per education type</h3>
+    <div id="chart_course_counts_per_educ_type"></div>
+    <table>
+        <tbody>
+            <?php foreach ($courseCountsPerEducType as $count) : ?>
                 <tr>
                     <td style="padding: 5px"><?= $count[0] ?></td>
                     <td style="padding: 5px"><?= $count[1] ?></td>

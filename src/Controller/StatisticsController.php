@@ -114,6 +114,35 @@ class StatisticsController extends AppController
         return $courseCountsPerCountry;
     }
 
+    private function getCourseCountsPerEducType()
+    {
+        $items = $this->Courses->find()
+            ->where([
+                'active' => 1,
+                'deleted' => 0,
+                'updated >' => new FrozenTime('-16 Months'),
+                'approved' => 1
+            ])
+            ->group('course_type_id')
+            ->contain(['CourseTypes'])
+            ->order(['CourseTypes.id' => 'asc']);
+        $courseCountsPerEducType = [];
+        $courseCountsPerEducType[] = ['Education type', 'Number of courses'];
+        foreach ($items as $item) {
+            $result = $this->Courses->find()
+                ->where([
+                    'course_type_id' => $item->course_type_id,
+                    'active' => 1,
+                    'deleted' => 0,
+                    'updated >' => new FrozenTime('-16 Months'),
+                    'approved' => 1
+                ])
+                ->count();
+            $courseCountsPerEducType[] = [$item->course_type->name, $result];
+        }
+        return $courseCountsPerEducType;
+    }
+
     private function getNewCourseCounts($periods)
     {
         // @PARAM $periods array, containing the number of months
@@ -232,7 +261,8 @@ class StatisticsController extends AppController
         $updatedCourseCounts = $this->getUpdatedCourseCounts(range(1, 24));
         $archivedSoonCourseCounts = $this->getArchivedSoonCourseCounts(range(1, 12));
         $outdatedCoursesPerCountries = $this->getCourseCountsPerCountry($outdated=true);
-        $courseCountsPerCountry= $this->getCourseCountsPerCountry($outdated=false);
+        $courseCountsPerCountry = $this->getCourseCountsPerCountry($outdated=false);
+        $this->set('courseCountsPerEducType', $this->getCourseCountsPerEducType());
         $newCourseCounts = $this->getNewCourseCounts(range(1, 18));
         $newAddedCourses = $this->getNewAddedCourses(25);
         $this->set(compact('user')); // required for contributors menu

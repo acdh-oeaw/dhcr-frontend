@@ -4,7 +4,8 @@
 *Release date: ...* 
 
 ### New features
-- Added amount of courses per country to statistics dashboard #105
+- Added barchart for amount of courses per country to course statistics dashboard #105
+- Added barchart for amount of courses per education type to course statistics dashboard #105
 - Added possibility to view only the errors from the log #81
 
 ### Small changes
