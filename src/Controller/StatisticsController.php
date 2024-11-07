@@ -76,34 +76,42 @@ class StatisticsController extends AppController
         return $archivedSoonCourseCounts;
     }
 
-    private function getOutdatedCoursesPerCountries()
+    private function getCourseCountsPerCountry($outdated=false)
     {
+        if($outdated == true) { 
+            $updatedMin = new FrozenTime('-24 Months');
+            $updatedMax = new FrozenTime('-16 Months');
+        } else {
+            $updatedMin = new FrozenTime('-16 Months');
+            $updatedMax = new FrozenTime();
+        }
         $items = $this->Courses->find()
             ->where([
                 'active' => 1,
                 'deleted' => 0,
-                'updated >=' => new FrozenTime('-24 Months'),
-                'updated <' => new FrozenTime('-16 Months'),
+                'updated >' => $updatedMin,
+                'updated <=' => $updatedMax,
                 'approved' => 1
             ])
             ->group('country_id')
             ->contain(['Countries'])
             ->order(['Countries.name' => 'asc']);
-        $OutdatedCoursesPerCountries = [];
+        $courseCountsPerCountry = [];
+        $courseCountsPerCountry[] = ['Country', 'Number of courses'];
         foreach ($items as $item) {
             $result = $this->Courses->find()
                 ->where([
                     'country_id' => $item->country_id,
                     'active' => 1,
                     'deleted' => 0,
-                    'updated >=' => new FrozenTime('-24 Months'),
-                    'updated <' => new FrozenTime('-16 Months'),
+                    'updated >' => $updatedMin,
+                    'updated <=' => $updatedMax,
                     'approved' => 1
                 ])
                 ->count();
-            $OutdatedCoursesPerCountries[$item->country->name] = $result;
+            $courseCountsPerCountry[] = [$item->country->name, $result];
         }
-        return $OutdatedCoursesPerCountries;
+        return $courseCountsPerCountry;
     }
 
     private function getNewCourseCounts($periods)
@@ -223,7 +231,8 @@ class StatisticsController extends AppController
         [$coursesTotal, $coursesBackend, $coursesPublic] = $this->getCoursesKeyData();
         $updatedCourseCounts = $this->getUpdatedCourseCounts(range(1, 24));
         $archivedSoonCourseCounts = $this->getArchivedSoonCourseCounts(range(1, 12));
-        $outdatedCoursesPerCountries = $this->getOutdatedCoursesPerCountries();
+        $outdatedCoursesPerCountries = $this->getCourseCountsPerCountry($outdated=true);
+        $courseCountsPerCountry= $this->getCourseCountsPerCountry($outdated=false);
         $newCourseCounts = $this->getNewCourseCounts(range(1, 18));
         $newAddedCourses = $this->getNewAddedCourses(25);
         $this->set(compact('user')); // required for contributors menu
@@ -232,6 +241,7 @@ class StatisticsController extends AppController
             'updatedCourseCounts',
             'archivedSoonCourseCounts',
             'outdatedCoursesPerCountries',
+            'courseCountsPerCountry',
             'newCourseCounts',
             'newAddedCourses'
         ));

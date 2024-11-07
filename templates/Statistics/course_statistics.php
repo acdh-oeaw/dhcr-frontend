@@ -11,6 +11,7 @@ use Cake\I18n\FrozenTime;
     google.charts.setOnLoadCallback(drawChartUpdatedCourses);
     google.charts.setOnLoadCallback(drawChartArchivedSoonCourses);
     google.charts.setOnLoadCallback(drawChartNewCourses);
+    google.charts.setOnLoadCallback(drawChartCourseCountsPerCountry);
 
     function drawChartUpdatedCourses() {
         var data1 = google.visualization.arrayToDataTable(<?php echo json_encode($updatedCourseCounts) ?>);
@@ -75,6 +76,20 @@ use Cake\I18n\FrozenTime;
             document.getElementById('chart_new_courses'));
         chart3.draw(data3, options3);
     }
+
+    function drawChartCourseCountsPerCountry() {
+        var data4 = google.visualization.arrayToDataTable(<?php echo json_encode($courseCountsPerCountry) ?>);
+        var options4 = {
+            height: 600,
+            width: 1600,
+            legend: {
+                position: "none"
+            },
+        };
+        var chart4 = new google.visualization.ColumnChart(
+            document.getElementById('chart_course_counts_per_country'));
+        chart4.draw(data4, options4);
+    }
 </script>
 
 <div class="statistics content">
@@ -105,25 +120,33 @@ use Cake\I18n\FrozenTime;
         <font color="green">Public visible: <?= $coursesPublic ?><br></font>
         Public as part of login area: <?= (int) ($coursesPublic / $coursesBackend * 100) ?>%
     </p>
+
+    <h3><span class="glyphicon glyphicon-flag"></span>&nbsp;&nbsp;&nbsp;Courses per country</h3>
+    <div id="chart_course_counts_per_country"></div>
+    <table>
+        <tbody>
+            <?php foreach ($courseCountsPerCountry as $count) : ?>
+                <tr>
+                    <td style="padding: 5px"><?= $count[0] ?></td>
+                    <td style="padding: 5px"><?= $count[1] ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <p></p>
     
     <h3><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;New added courses in the last 1,5 year</h3>
     <p><i>Includes not published or unpublished courses.</i></p>
     <div id="chart_new_courses"></div>
     <p></p>
 
-    <h3><span class="glyphicon glyphicon-flag"></span>&nbsp;&nbsp;&nbsp;Outdated Courses - By country</h3>
+    <h3><span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;&nbsp;Outdated Courses - By country</h3>
     <table>
-        <thead>
-            <tr>
-                <th align="left" style="padding: 5px">Country</th>
-                <th align="left" style="padding: 5px">Outdated courses</th>
-            </tr>
-        </thead>
         <tbody>
-            <?php foreach ($outdatedCoursesPerCountries as $country => $amount) :; ?>
+            <?php foreach ($outdatedCoursesPerCountries as $count) : ?>
                 <tr>
-                    <td style="padding: 5px"><?= $country ?></td>
-                    <td style="padding: 5px"><?= $amount ?></td>
+                    <td style="padding: 5px"><?= $count[0] ?></td>
+                    <td style="padding: 5px"><?= $count[1] ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -134,7 +157,7 @@ use Cake\I18n\FrozenTime;
     <div id="chart_updated_courses"></div>
     <p></p>
 
-    <h3><span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;&nbsp;Amount of courses that will be archived soon</h3>
+    <h3><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;&nbsp;Amount of courses that will be archived soon</h3>
     <div id="chart_archived_soon_courses"></div>
     <p></p>
 
