@@ -1,7 +1,14 @@
 # Release notes
 
+## Version 2024-12
+*Release date: ...*
+
+### Change
+- xyz
+
+
 ## Version 2024-11
-*Release date: ...*  
+*Release date: ...*
 
 ### New features
 - Added barchart for amount of courses per country to course statistics dashboard #105
