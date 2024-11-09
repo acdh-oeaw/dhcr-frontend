@@ -5,6 +5,7 @@
 
 ### Changes
 - Added unique validation for invite translation - language id #59
+- Added unique validation for faq questions - question #59
 
 
 ## Version 2024-11
