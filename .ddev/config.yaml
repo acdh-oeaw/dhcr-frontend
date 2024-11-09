@@ -115,7 +115,7 @@ disable_upload_dirs_warning: true
 # If true, turns off the normal warning that says
 # "You have Mutagen enabled and your 'php' project type doesn't have upload_dirs set"
 
-# ddev_version_constraint: ""
+ddev_version_constraint: ">=1.23.5"
 # Example:
 # ddev_version_constraint: ">= 1.22.4"
 # This will enforce that the running ddev version is within this constraint.
