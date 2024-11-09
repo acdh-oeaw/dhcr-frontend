@@ -3,8 +3,8 @@
 ## Version 2024-12
 *Release date: ...*
 
-### Change
-- xyz
+### Changes
+- Added unique validation for invite translation - language id #59
 
 
 ## Version 2024-11
