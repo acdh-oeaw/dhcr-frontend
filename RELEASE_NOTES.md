@@ -1,9 +1,28 @@
 # Release notes
 
+## Version 2024-11
+*Release date: 2024-11-15*
+
+### New features
+- Added barchart for amount of courses per country to course statistics dashboard #105
+- Added barchart for amount of courses per education type to course statistics dashboard #105
+- Added possibility to view only the errors from the log #81
+
+### Small changes
+- Updated dependencies
+- Updated Composer to 2.8.2
+- Removed email addresses from api output #109
+- Added logging for mailman sync #80
+
+### Bug fixes
+- Fix: Course start dates are shown earlier in different timezone #113
+- Fix: User account can be approved before email address is confirmed #108
+
+
 ## Version 2024-10
 *Release date: 2024-11-06*
 
-### Changes
+### Change
 -  Migrated to CakePHP 4.5.7 and PHP 8.3 #85
 
 ### Small changes
@@ -19,6 +38,7 @@
 ### Bug fix
 - Fix: Required file missing - sitemap.xml #110
 
+
 ## Version 2024-09/2
 *Release date: 2024-10-22*
 
@@ -26,7 +46,7 @@
 - Fix: Required file missing - search_list.json #110 
 
 
-## Version 2024-09 
+## Version 2024-09
 *Release date: 2024-10-05*
 
 ### Bug fix

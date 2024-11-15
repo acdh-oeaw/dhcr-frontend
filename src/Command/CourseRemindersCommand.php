@@ -12,6 +12,10 @@ use Exception;
 
 class CourseRemindersCommand extends Command
 {
+    public $Courses = null;
+    public $Users = null;
+    public $Logentries = null;
+
     private function getModeratorEmails()
     {
         $moderators = $this->Users->find()->where([
@@ -71,6 +75,9 @@ class CourseRemindersCommand extends Command
         $this->loadModel('Logentries');
         $waitPeriod = new FrozenTime('-10 Days');    // no mail will be sent within $waitPeriod days after previous mail
 
+        // needed for logging
+        $scriptName = str_replace('Command', '', basename(__FILE__, '.php'));
+
         // clean up old log entries after 3 months
         $oldEntries = $this->Logentries->find()->where(['created <' => new FrozenTime('-3 Months')]);
         $io->out('Cleaned up old log entries: ' . $oldEntries->count());
@@ -103,7 +110,7 @@ class CourseRemindersCommand extends Command
                 $this->Logentries->createLogEntry(
                     '50',
                     '586',
-                    basename(__FILE__, '.php'),
+                    $scriptName,
                     'Spam guard',
                     $errorMessage
                 );
@@ -166,7 +173,7 @@ class CourseRemindersCommand extends Command
                     $this->Logentries->createLogEntry(
                         '90',
                         '586',
-                        basename(__FILE__, '.php'),
+                        $scriptName,
                         'DB error',
                         $errorMessage
                     );
@@ -177,7 +184,7 @@ class CourseRemindersCommand extends Command
             $this->Logentries->createLogEntry(
                 '30',
                 '586',
-                basename(__FILE__, '.php'),
+                $scriptName,
                 'Sent reminder mail',
                 $logDescription
             );
@@ -208,7 +215,7 @@ class CourseRemindersCommand extends Command
                 $this->Logentries->createLogEntry(
                     '90',
                     '586',
-                    basename(__FILE__, '.php'),
+                    $scriptName,
                     $logSubject,
                     $logDescription
                 );
@@ -228,7 +235,7 @@ class CourseRemindersCommand extends Command
         $this->Logentries->createLogEntry(
             '10',
             '586',
-            basename(__FILE__, '.php'),
+            $scriptName,
             'Finished. Stats:',
             $logDescription
         );

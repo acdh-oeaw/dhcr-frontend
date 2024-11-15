@@ -97,7 +97,7 @@ class ReviewRemindersCommand extends Command
         $this->loadModel('Users');
         $this->loadModel('Logentries');
         $io->out('~~~ Started Review Reminders ~~~');
-        $issuesUrl = 'https://github.com/acdh-oeaw/dhcr-main/labels/InReview';
+        $issuesUrl = 'https://github.com/acdh-oeaw/dhcr-main/labels/inreview';
         $content = file_get_contents($issuesUrl);
         $pattern = '/\b\d+\sOpen\b/i';
         if (preg_match($pattern, $content, $lines)) {
