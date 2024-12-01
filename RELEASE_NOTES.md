@@ -9,6 +9,7 @@
 
 ### Small changes
 - Updated dependencies
+- Updated composer to 2.8.3
 
 
 ## Version 2024-11
