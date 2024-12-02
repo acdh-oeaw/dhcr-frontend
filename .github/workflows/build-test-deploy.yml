@@ -219,6 +219,8 @@ jobs:
           fi
           kubectl replace -f secrets.yaml -n "${{ secrets.KUBE_NAMESPACE }}" --force
           rm secrets.yaml
+      - name: Wait for 30 seconds
+        run: sleep 30
       - name: Deploy using helm and the local helm chart
         env:
           SECRETS_CONTEXT: ${{ toJson(secrets) }} 
