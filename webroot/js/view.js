@@ -252,7 +252,7 @@ class View {
         helper.createTermData('Record Id', course, 'id').createGridItem();
 
         if (course.info_url.length > 0 && course.info_url != 'null') {
-            helper.createTermData('Source URL', course, 'info_url').createGridItem('single-col');
+            helper.createTermData('Course URL', course, 'info_url').createGridItem('single-col');
         }
 
         el.append($(helper.createGridContainer().result));
