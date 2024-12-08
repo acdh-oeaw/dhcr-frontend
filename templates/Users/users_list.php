@@ -27,7 +27,7 @@
                             } ?>
                             <th align="left" style="padding: 5px">Institution</th>
                             <?php if ($users_view_type == 'Pending Invitations') { ?>
-                                <th align="left" style="padding: 5px">Invitation valid until</th>
+                                <th align="left" style="padding: 5px"><?= $this->Paginator->sort('created', ['label' => 'Invitation valid until']) ?></th>
                             <?php } else { ?>
                                 <th align="left" style="padding: 5px">Other Organisation</th>
                             <?php } ?>
