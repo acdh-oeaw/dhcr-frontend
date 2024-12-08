@@ -489,28 +489,28 @@ class UsersController extends AppController
         $breadcrumActions[1] = 'approve';
         $this->set((compact('breadcrumTitles', 'breadcrumControllers', 'breadcrumActions')));
         if ($user->is_admin) {
-            $query = $this->Users->find('all', ['order' => ['Users.created' => 'DESC']])
+            $query = $this->Users->find('all')
                 ->contain('Institutions')
                 ->where([
                     'approved' => 0,
                     'active' => 1,
                     'email_verified' => 1
                 ]);
-            $this->set('users', $this->paginate($query));
+            $this->set('users', $this->paginate($query, ['order' => ['Users.created' => 'DESC']]));
             $usersCount = $this->Users->find()->where([
                 'approved' => 0,
                 'active' => 1
             ])
                 ->count();
         } elseif ($user->user_role_id == 2) {
-            $query = $this->Users->find('all', ['order' => ['Users.created' => 'DESC']])
+            $query = $this->Users->find('all')
                 ->contain('Institutions')
                 ->where([
                     'approved' => 0,
                     'active' => 1,
                     'Users.country_id' => $user->country_id
                 ]);
-            $this->set('users', $this->paginate($query));
+            $this->set('users', $this->paginate($query), ['order' => ['Users.created' => 'DESC']]);
             $usersCount = $this->Users->find()->where([
                 'approved' => 0,
                 'active' => 1,
@@ -813,11 +813,11 @@ class UsersController extends AppController
                         return $this->redirect(['controller' => 'Dashboard', 'action' => 'profileSettings']);
                     } else {
                         $errorMessage = 'Subscription status not saved in DB';
-                        $this->Flash->error('Error: ' .$errorMessage);
+                        $this->Flash->error('Error: ' . $errorMessage);
                     }
                 } else {    // invalid response from mailman
                     $errorMessage = 'Subscription change not processed external';
-                    $this->Flash->error('Error: ' .$errorMessage);
+                    $this->Flash->error('Error: ' . $errorMessage);
                 }
                 // log error
                 $this->Logentries->createLogEntry(
@@ -994,14 +994,14 @@ class UsersController extends AppController
         $breadcrumActions[1] = 'moderated';
         $this->set((compact('breadcrumTitles', 'breadcrumControllers', 'breadcrumActions')));
         if ($user->user_role_id == 2) {
-            $query = $this->Users->find('all', ['order' => ['Users.last_name' => 'ASC']])
+            $query = $this->Users->find('all')
                 ->where([
                     'approved' => 1,
                     'active' => 1,
                     'Users.country_id' => $user->country_id,
                 ])
                 ->contain(['Institutions']);
-            $this->set('users', $this->paginate($query));
+            $this->set('users', $this->paginate($query, ['order' => ['Users.last_name' => 'ASC']]));
         } else {
             $this->Flash->error(__('Not authorized to moderated users'));
             return $this->redirect(['controller' => 'Dashboard', 'action' => 'index']);
@@ -1026,9 +1026,9 @@ class UsersController extends AppController
         $breadcrumActions[1] = 'all';
         $this->set((compact('breadcrumTitles', 'breadcrumControllers', 'breadcrumActions')));
         if ($user->is_admin) {
-            $query = $this->Users->find('all', ['order' => ['Users.last_name' => 'ASC']])
+            $query = $this->Users->find('all')
                 ->contain(['Institutions']);
-            $this->set('users', $this->paginate($query));
+            $this->set('users', $this->paginate($query, ['order' => ['Users.last_name' => 'ASC']]));
         } else {
             $this->Flash->error(__('Not authorized to all users'));
             return $this->redirect(['controller' => 'Dashboard', 'action' => 'index']);
@@ -1054,7 +1054,7 @@ class UsersController extends AppController
         $breadcrumActions[1] = 'pendingInvitations';
         $this->set((compact('breadcrumTitles', 'breadcrumControllers', 'breadcrumActions')));
         if ($user->is_admin) {
-            $query = $this->Users->find('all', ['order' => ['Users.password_token_expires' => 'DESC']])
+            $query = $this->Users->find('all')
                 ->where([
                     'approved' => 1,
                     'active' => 1,
@@ -1063,9 +1063,9 @@ class UsersController extends AppController
                     'password_token IS NOT NULL',
                 ])
                 ->contain(['Institutions']);
-            $this->set('users', $this->paginate($query));
+            $this->set('users', $this->paginate($query, ['order' => ['Users.password_token_expires' => 'DESC']]));
         } elseif ($user->user_role_id == 2) {
-            $query = $this->Users->find('all', ['order' => ['Users.password_token_expires' => 'DESC']])
+            $query = $this->Users->find('all')
                 ->where([
                     'approved' => 1,
                     'active' => 1,
@@ -1075,7 +1075,7 @@ class UsersController extends AppController
                     'Users.country_id' => $user->country_id,
                 ])
                 ->contain(['Institutions']);
-            $this->set('users', $this->paginate($query));
+            $this->set('users', $this->paginate($query, ['order' => ['Users.password_token_expires' => 'DESC']]));
         }
         $this->set(compact('user')); // required for contributors menu
         // "customize" view
@@ -1097,12 +1097,12 @@ class UsersController extends AppController
         $breadcrumControllers[1] = 'Users';
         $breadcrumActions[1] = 'moderators';
         $this->set((compact('breadcrumTitles', 'breadcrumControllers', 'breadcrumActions')));
-        $query = $this->Users->find('all', ['order' => ['Users.last_name' => 'ASC']])
+        $query = $this->Users->find('all')
             ->where([
                 'user_role_id' => 2
             ])
             ->contain(['Institutions']);
-        $this->set('users', $this->paginate($query));
+        $this->set('users', $this->paginate($query, ['order' => ['Users.last_name' => 'ASC']]));
         $this->set(compact('user')); // required for contributors menu
         // "customize" view
         $this->set('users_icon', 'asterisk');

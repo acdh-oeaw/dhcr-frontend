@@ -12,6 +12,9 @@
 - Updated composer to 2.8.3
 - Updated wording for source URL #115
 
+### Bug fixe
+- Fix: Sorting of lists in login area does not work properly #116
+
 
 ## Version 2024-11
 *Release date: 2024-11-15*
