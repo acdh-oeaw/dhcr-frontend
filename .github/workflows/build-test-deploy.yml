@@ -74,7 +74,7 @@ jobs:
           cache-to: type=gha,mode=max
   test:
     name: Test code from the branch ${{ github.ref_name }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     environment: ${{ github.ref_name }}
     steps:
       - name: checkout
@@ -117,7 +117,7 @@ jobs:
   deploy:
     needs: [build, test]
     name: Deploy Docker image from the branch ${{ github.ref_name }}
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-24.04'
     environment: ${{ github.ref_name }}
     env:
       SECRETS_CONTEXT: ${{ toJson(secrets) }}
@@ -219,8 +219,6 @@ jobs:
           fi
           kubectl replace -f secrets.yaml -n "${{ secrets.KUBE_NAMESPACE }}" --force
           rm secrets.yaml
-      - name: Wait for 30 seconds
-        run: sleep 30
       - name: Deploy using helm and the local helm chart
         env:
           SECRETS_CONTEXT: ${{ toJson(secrets) }} 
