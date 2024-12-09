@@ -21,11 +21,8 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 
 {{- define "imagename" -}}
-{{- if eq .Values.image.tag "" -}}
-{{- .Values.image.repository -}}
-{{- else -}}
-{{- printf "%s:%s" .Values.image.repository .Values.image.tag -}}
-{{- end -}}
+{{- $tag := .Values.image.tag | default "latest" -}}
+{{- printf "%s:%s" .Values.image.repository $tag -}}
 {{- end -}}
 
 {{- define "trackableappname" -}}
