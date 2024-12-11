@@ -149,6 +149,8 @@ jobs:
           docker_tag="${{ steps.meta.outputs.tags }}"
           repository=${docker_tag/:*/}
           tag=${docker_tag/*:/}
+          echo "repository: $repository"
+          echo "tag: $tag"
           cat > auto-deploy-app-values.yaml <<EOF
           replicaCount: 1
           image:
