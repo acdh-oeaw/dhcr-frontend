@@ -155,7 +155,7 @@ jobs:
           replicaCount: 1
           image:
             repository: $repository
-            tag: "latest"
+            tag: '$tag'
             pullPolicy: Always
           extraLabels:
             "ID": "${{ secrets.SERVICE_ID }}"
