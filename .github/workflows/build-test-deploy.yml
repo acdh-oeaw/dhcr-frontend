@@ -143,7 +143,7 @@ jobs:
           images: |
             ${{ env.DOCKER_TAG }}/${{ github.ref_name }}
           tags: |
-            type=raw,value={{github.sha}}
+            type=raw,value={{sha}}
       - name: Create auto-deploy-app-values.yaml
         run: |
           docker_tag="${{ steps.meta.outputs.tags }}"
@@ -155,7 +155,7 @@ jobs:
           replicaCount: 1
           image:
             repository: $repository
-            tag: $tag
+            tag: "latest"
             pullPolicy: Always
           extraLabels:
             "ID": "${{ secrets.SERVICE_ID }}"
