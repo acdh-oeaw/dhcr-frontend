@@ -1,7 +1,7 @@
 # Release notes
 
 ## Version 2024-12
-*Release date: 2024-12-11*  
+*Release date: 2024-12-11*   
 
 ### Bug fix
 - Fix: Sorting of lists in login area does not work properly #116
