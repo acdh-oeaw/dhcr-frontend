@@ -1,19 +1,20 @@
 # Release notes
 
 ## Version 2024-12
-*Release date: ...*
+*Release date: 2024-12-11*
+
+### Bug fix
+- Fix: Sorting of lists in login area does not work properly #116
 
 ### Changes
 - Added unique validation for invite translation - language id #59
 - Added unique validation for faq questions - question #59
+- Cleaned up and removed default comments in dhcrcore module #none
 
 ### Small changes
 - Updated dependencies
-- Updated composer to 2.8.3
+- Updated composer to 2.8.4
 - Updated wording for source URL #115
-
-### Bug fixe
-- Fix: Sorting of lists in login area does not work properly #116
 
 
 ## Version 2024-11
