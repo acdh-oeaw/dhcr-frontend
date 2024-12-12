@@ -1,5 +1,13 @@
 # Release notes
 
+## Version 2025-01
+*Release date: ...*
+
+### Small changes
+- ...
+- ...
+
+
 ## Version 2024-12
 *Release date: 2024-12-11*
 
