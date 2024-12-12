@@ -29,8 +29,8 @@ class InstitutionsController extends AppController
         $breadcrumControllers[1] = 'Institutions';
         $breadcrumActions[1] = 'index';
         $this->set((compact('breadcrumTitles', 'breadcrumControllers', 'breadcrumActions')));
-        $query = $this->Institutions->find('all', ['order' => ['Institutions.id' => 'ASC']])->contain(['Countries', 'Cities']);
-        $this->set('institutions', $this->paginate($query));
+        $query = $this->Institutions->find('all')->contain(['Countries', 'Cities']);
+        $this->set('institutions', $this->paginate($query, ['order' => ['Institutions.id' => 'ASC']]));
         $this->set(compact('user')); // required for contributors menu
     }
 

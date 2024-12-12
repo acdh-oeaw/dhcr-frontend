@@ -75,6 +75,8 @@ class FaqQuestionsController extends AppController
             $query = $this->FaqQuestions->find()->where(['faq_category_id =' => $faqQuestion->faq_category_id]);
             $nextSortOrder = $query->select(['sortOrder' => $query->func()->max('sort_order')])->first()->sortOrder + 1;
             $faqQuestion->sort_order = $nextSortOrder;
+            // remove spaces to make sure that unique validation works
+            $faqQuestion->question = trim($faqQuestion->question);
             if ($this->FaqQuestions->save($faqQuestion)) {
                 $this->Flash->success(__('The faq question has been saved.'));
                 return $this->redirect(['controller' => 'Dashboard', 'action' => 'faqQuestions']);
@@ -114,6 +116,8 @@ class FaqQuestionsController extends AppController
                     ->sort_order;
                 $faqQuestion->sort_order = $maxSortOrder + 1;
             }
+            // remove spaces to make sure that unique validation works
+            $faqQuestion->question = trim($faqQuestion->question);
             if ($this->FaqQuestions->save($faqQuestion)) {
                 $this->Flash->success(__('The faq question has been updated.'));
                 return $this->redirect(['controller' => 'FaqQuestions', 'action' => 'index', $faqQuestion->faq_category_id]);

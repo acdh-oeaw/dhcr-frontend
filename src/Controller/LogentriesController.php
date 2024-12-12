@@ -29,8 +29,8 @@ class LogentriesController extends AppController
         $breadcrumControllers[1] = 'Logentries';
         $breadcrumActions[1] = 'index';
         $this->set((compact('breadcrumTitles', 'breadcrumControllers', 'breadcrumActions')));
-        $query = $this->Logentries->find('all', ['order' => ['Logentries.id' => 'DESC']])->contain(['LogentryCodes', 'Users']);
-        $this->set('logentries', $this->paginate($query));
+        $query = $this->Logentries->find('all')->contain(['LogentryCodes', 'Users']);
+        $this->set('logentries', $this->paginate($query, ['order' => ['Logentries.id' => 'DESC']]));
         $this->set(compact('user')); // required for contributors menu
         $this->render('show-entries');
     }
@@ -53,10 +53,10 @@ class LogentriesController extends AppController
         $breadcrumControllers[2] = 'Logentries';
         $breadcrumActions[2] = 'errors';
         $this->set((compact('breadcrumTitles', 'breadcrumControllers', 'breadcrumActions')));
-        $query = $this->Logentries->find('all', ['order' => ['Logentries.id' => 'DESC']])
+        $query = $this->Logentries->find('all')
             ->where(['logentry_code_id >=' => '50'])
             ->contain(['LogentryCodes', 'Users']);
-        $this->set('logentries', $this->paginate($query));
+        $this->set('logentries', $this->paginate($query, ['order' => ['Logentries.id' => 'DESC']]));
         $this->set(compact('user')); // required for contributors menu
         $this->render('show-entries');
     }

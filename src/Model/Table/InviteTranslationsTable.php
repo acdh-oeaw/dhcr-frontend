@@ -61,6 +61,7 @@ class InviteTranslationsTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['sortOrder']), ['errorField' => 'sortOrder']);
+        $rules->add($rules->isUnique(['language_id']), ['errorField' => 'language_id']);
         $rules->add($rules->existsIn(['language_id'], 'Languages'), ['errorField' => 'language_id']);
 
         return $rules;

@@ -68,7 +68,7 @@ class FaqQuestionsTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn(['faq_category_id'], 'FaqCategories'), ['errorField' => 'faq_category_id']);
-
+        $rules->add($rules->isUnique(['question']), ['errorField' => 'question']);
         return $rules;
     }
 }
