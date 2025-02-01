@@ -4,8 +4,8 @@
 *Release date: ...*
 
 ### Small changes
-- ...
-- ...
+- Updated dependencies
+- Updated composer 2.8.5
 
 
 ## Version 2024-12
