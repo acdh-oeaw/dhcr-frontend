@@ -1,7 +1,7 @@
 # Release notes
 
 ## Version 2025-02
-*Release date: ....*
+*Release date: 2025-02-09*
 
 ### Small changes
 - Updated dependencies
